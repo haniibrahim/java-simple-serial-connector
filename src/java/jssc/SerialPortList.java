@@ -43,7 +43,8 @@ public class SerialPortList {
         serialInterface = new SerialNativeInterface();
         switch (SerialNativeInterface.getOsType()) {
             case SerialNativeInterface.OS_LINUX: {
-                PORTNAMES_REGEXP = Pattern.compile("(ttyS|ttyUSB|ttyACM|ttyAMA|rfcomm|ttyO)[0-9]{1,3}");
+                //PORTNAMES_REGEXP = Pattern.compile("(ttyS|ttyUSB|ttyACM|ttyAMA|rfcomm|ttyO)[0-9]{1,3}");
+                PORTNAMES_REGEXP = Pattern.compile("");
                 PORTNAMES_PATH = "/dev/";
                 break;
             }
@@ -53,7 +54,9 @@ public class SerialPortList {
                 break;
             }
             case SerialNativeInterface.OS_MAC_OS_X: {
-                PORTNAMES_REGEXP = Pattern.compile("tty.(serial|usbserial|usbmodem).*");
+                //PORTNAMES_REGEXP = Pattern.compile("tty.(serial|usbserial|usbmodem).*");
+                // Now lists _all_ call-in-devives (tty.*) and all call-out devices (cu.*).
+                PORTNAMES_REGEXP = Pattern.compile("(tty|cu)[.]{1}.{1,}");
                 PORTNAMES_PATH = "/dev/";
                 break;
             }
